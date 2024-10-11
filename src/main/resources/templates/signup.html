@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>회원가입</title>
+    <style>
+        /* 기존 스타일 유지 */
+    </style>
+</head>
+<body>
+<h2>회원가입</h2>
+<form th:action="@{/members/signup}" th:object="${memberJoinDto}" method="post">
+    <div th:if="${error}" th:text="${error}" style="color: red;"></div>
+
+    <div>
+        <label for="name">이름:</label>
+        <input type="text" id="name" th:field="*{name}" required>
+    </div>
+    <div>
+        <label for="email">이메일:</label>
+        <input type="email" id="email" th:field="*{email}" required>
+    </div>
+    <div>
+        <label for="password">비밀번호:</label>
+        <input type="password" id="password" th:field="*{password}" required>
+    </div>
+    <div>
+        <label for="gender">성별:</label>
+        <select id="gender" th:field="*{gender}">
+            <option value="1">남성</option>
+            <option value="2">여성</option>
+            <option value="3">선택안함</option>
+        </select>
+    </div>
+    <div>
+        <label for="birthYear">출생년도:</label>
+        <input type="number" id="birthYear" th:field="*{birthYear}" required>
+    </div>
+    <div>
+        <label for="birthMonth">출생월:</label>
+        <input type="number" id="birthMonth" th:field="*{birthMonth}" min="1" max="12" required>
+    </div>
+    <div>
+        <label for="birthDay">출생일:</label>
+        <input type="number" id="birthDay" th:field="*{birthDay}" min="1" max="31" required>
+    </div>
+    <div>
+        <label for="address">주소:</label>
+        <input type="text" id="address" th:field="*{address}" required>
+    </div>
+    <div>
+        <label for="specAddress">상세주소:</label>
+        <input type="text" id="specAddress" th:field="*{specAddress}" required>
+    </div>
+    <div>
+        <label>선호 카테고리:</label>
+        <div class="preferCategory">
+            <label><input type="checkbox" name="preferCategory" value="1"> 한식</label>
+            <label><input type="checkbox" name="preferCategory" value="2"> 중식</label>
+            <label><input type="checkbox" name="preferCategory" value="3"> 일식</label>
+        </div>
+    </div>
+    <div>
+        <label for="role">역할:</label>
+        <select id="role" th:field="*{role}">
+            <option value="USER">일반 사용자</option>
+            <option value="ADMIN">관리자</option>
+        </select>
+    </div>
+    <button type="submit">가입하기</button>
+</form>
+</body>
+</html>

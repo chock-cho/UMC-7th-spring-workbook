@@ -1,0 +1,12 @@
+# IntelliJ IDEA 관련 파일 무시
+.idea/
+*.iml
+
+# 빌드 결과물 무시
+out/
+build/
+target/
+
+# 시스템 파일 무시
+.DS_Store
+Thumbs.db

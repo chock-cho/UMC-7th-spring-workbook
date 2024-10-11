@@ -1,0 +1,11 @@
+name: UMC Dev CI/CD // 여러분들 맘대로 이름 지으세요
+
+on:
+  pull_request:
+    types: [closed]
+  workflow_dispatch: # (2).수동 실행도 가능하도록
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # (3).OS환경
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'develop'
