@@ -2,7 +2,7 @@ package umc.study.apiPayload.code;
 
 public interface BaseCode {
 
-    public ReasonDTO getReason();
+    ReasonDTO getReason();
 
-    public ReasonDTO getReasonHttpStatus();
+    ReasonDTO getReasonHttpStatus();
 }
