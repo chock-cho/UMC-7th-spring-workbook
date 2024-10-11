@@ -2,12 +2,17 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.0.0'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group = 'com.example'
 version = '1.0.0'
 sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
 
 repositories {
 	mavenCentral()
@@ -52,51 +57,20 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 
 }
-
-clean {
-	delete fileTree(dir: 'src/main/generated', include: '**/*.java')
-}
-
-tasks.withType(JavaCompile) {
-	options.compilerArgs += [
-			'--add-opens',
-			'java.base/java.lang=ALL-UNNAMED',
-			'--add-opens',
-			'java.base/java.util=ALL-UNNAMED'
-	]
-}
-
-
-sourceSets {
-	main {
-		java {
-			srcDirs = ['src/main/java', 'src/main/resources', 'src/main/generated']
-		}
-	}
-}
-
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
-// Querydsl 설정부
-def generated = 'src/main/generated'
+def querydslDir = "src/main/generated"
 
-querydsl {
-	jpa = true
-	querydslSourcesDir = generated
-}
 sourceSets {
-	main.java.srcDir generated
+	main.java.srcDirs += [ querydslDir ]
 }
 
-compileQuerydsl{
-	options.annotationProcessorPath = configurations.querydsl
+tasks.withType(JavaCompile) {
+	options.annotationProcessorGeneratedSourcesDirectory = file(querydslDir)
 }
 
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-	querydsl.extendsFrom compileClasspath
+clean.doLast {
+	file(querydslDir).deleteDir()
 }
