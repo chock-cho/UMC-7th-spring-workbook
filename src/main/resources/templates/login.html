@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+</head>
+<body>
+<h2>Login</h2>
+<form th:action="@{/login}" method="post">
+    <div>
+        <label for="username">Email:</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit">Login</button>
+</form>
+
+<p th:if="${param.error}">사용자 이름 또는 비밀번호가 잘못되었습니다.</p>
+<p th:if="${param.logout}">로그아웃되었습니다.</p>
+
+<!-- 회원가입 링크 수정 -->
+<p>계정이 없나요? <a th:href="@{/signup}">Sign up</a></p>
+</body>
+</html>

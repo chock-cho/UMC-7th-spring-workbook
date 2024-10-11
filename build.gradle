@@ -41,6 +41,9 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-data-rest:1.6.9'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
 
 clean {

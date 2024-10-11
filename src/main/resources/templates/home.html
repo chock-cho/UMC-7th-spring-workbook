@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<h2>Welcome to Home Page!</h2>
+
+<p th:text="'반가워, ' + ${#authentication.name} + '!'"></p>
+
+<!-- 관리자 권한이 있을 때만 관리자 페이지 버튼 표시 -->
+<div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+    <a th:href="@{/admin}">관리자 페이지로 이동</a>
+</div>
+
+<!-- 로그아웃 버튼 추가 -->
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Logout</button>
+</form>
+</body>
